@@ -64,7 +64,6 @@ psnr_x_art = compare_psnr(x/nor, x_art/nor)
 ssim_x_low = compare_ssim(x_low/nor, x/nor)
 ssim_x_art = compare_ssim(x_art/nor, x/nor)
 
-
 ## DISPLAY
 wndImg = [0, 0.03]
 wndPrj = [0, 6]
@@ -79,44 +78,39 @@ plt.subplot(242)
 plt.imshow(x_full, cmap='gray', vmin=wndImg[0], vmax=wndImg[1])
 plt.axis('off')
 plt.axis('image')
-plt.title('full-dose\n(VIEW: %d' % VIEW)
+plt.title('full-dose')
 
 plt.subplot(243)
 plt.imshow(x_low, cmap='gray', vmin=wndImg[0], vmax=wndImg[1])
 plt.axis('off')
 plt.axis('image')
-plt.title('low-dose\n(MSE: %.4f, PSNR: %.4f, SSIM: %.4f' % (mse_x_low, psnr_x_low, ssim_x_low))
+plt.title('low-dose\nMSE: %.4f\nPSNR: %.4f\nSSIM: %.4f' % (mse_x_low, psnr_x_low, ssim_x_low))
 
 plt.subplot(244)
 plt.imshow(x_art, cmap='gray', vmin=wndImg[0], vmax=wndImg[1])
 plt.axis('off')
 plt.axis('image')
-plt.title('ART\n(MSE: %.4f, PSNR: %.4f, SSIM: %.4f' % (mse_x_art, psnr_x_art, ssim_x_art))
+plt.title('ART\nMSE: %.4f\nPSNR: %.4f\nSSIM: %.4f' % (mse_x_art, psnr_x_art, ssim_x_art))
 
 plt.subplot(246)
 plt.imshow(p, cmap='gray', vmin=wndPrj[0], vmax=wndPrj[1])
-plt.axis('off')
 plt.axis('image')
-plt.title('full-dose\n(VIEW: %d' % VIEW)
-plt.xlabel('Angle: %.2f' % (ANG/VIEW))
+plt.title('full-dose\n(VIEW: %d)' % VIEW)
+plt.xlabel('View')
 plt.ylabel('Detector')
 
 plt.subplot(247)
 plt.imshow(y, cmap='gray', vmin=wndPrj[0], vmax=wndPrj[1])
-plt.axis('off')
 plt.axis('image')
-plt.title('low-dose\n(VIEW: %d' % VIEW)
-plt.xlabel('Angle: %.2f' % (ANG/VIEW))
+plt.title('low-dose\n(VIEW: %d)' % VIEW)
+plt.xlabel('View')
 plt.ylabel('Detector')
 
 plt.subplot(248)
 plt.imshow(y - p, cmap='gray')
-plt.axis('off')
 plt.axis('image')
-plt.title('ART\n(VIEW: %d' % VIEW)
-plt.xlabel('Angle: %.2f' % (ANG/VIEW))
+plt.title('full-dose - low-dose')
+plt.xlabel('View')
 plt.ylabel('Detector')
 
 plt.show()
-
-
