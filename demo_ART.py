@@ -109,7 +109,7 @@ plt.ylabel('Detector')
 plt.subplot(248)
 plt.imshow(y - p, cmap='gray')
 plt.axis('image')
-plt.title('full-dose - low-dose')
+plt.title('full-dose - low-dose\n(Poisson noise)')
 plt.xlabel('View')
 plt.ylabel('Detector')
 
