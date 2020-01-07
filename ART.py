@@ -1,5 +1,11 @@
+## REFERENCE
+# https://en.wikipedia.org/wiki/Algebraic_reconstruction_technique
+
+## ART Equation
+# x^(k+1) = x^k + lambda * AT(b - A(x))/ATA
+
+##
 import numpy as np
-from skimage.transform import radon, iradon
 import matplotlib.pyplot as plt
 
 
