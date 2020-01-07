@@ -9,9 +9,12 @@ import matplotlib.pyplot as plt
 from skimage.transform import radon, iradon
 from scipy.io import loadmat
 from scipy.stats import poisson
-from skimage.measure import compare_mse
-from skimage.measure import compare_psnr
-from skimage.measure import compare_ssim
+# from skimage.measure import compare_mse
+# from skimage.measure import compare_psnr
+# from skimage.measure import compare_ssim
+from skimage.metrics import mean_squared_error as mse
+from skimage.metrics import peak_signal_noise_ratio as psnr
+from skimage.metrics import structural_similarity as ssim
 from ART import ART
 
 ## SYSTEM SETTING
@@ -55,14 +58,14 @@ x_low[x_low < 0] = 0
 x_art[x_art < 0] = 0
 nor = np.amax(x)
 
-mse_x_low = compare_mse(x/nor, x_low/nor)
-mse_x_art = compare_mse(x/nor, x_art/nor)
+mse_x_low = mse(x/nor, x_low/nor)
+mse_x_art = mse(x/nor, x_art/nor)
 
-psnr_x_low = compare_psnr(x/nor, x_low/nor)
-psnr_x_art = compare_psnr(x/nor, x_art/nor)
+psnr_x_low = psnr(x/nor, x_low/nor)
+psnr_x_art = psnr(x/nor, x_art/nor)
 
-ssim_x_low = compare_ssim(x_low/nor, x/nor)
-ssim_x_art = compare_ssim(x_art/nor, x/nor)
+ssim_x_low = ssim(x_low/nor, x/nor)
+ssim_x_art = ssim(x_art/nor, x/nor)
 
 ## DISPLAY
 wndImg = [0, 0.03]
@@ -94,21 +97,18 @@ plt.title('ART\nMSE: %.4f\nPSNR: %.4f\nSSIM: %.4f' % (mse_x_art, psnr_x_art, ssi
 
 plt.subplot(246)
 plt.imshow(p, cmap='gray', vmin=wndPrj[0], vmax=wndPrj[1])
-plt.axis('image')
 plt.title('full-dose\n(VIEW: %d)' % VIEW)
 plt.xlabel('View')
 plt.ylabel('Detector')
 
 plt.subplot(247)
 plt.imshow(y, cmap='gray', vmin=wndPrj[0], vmax=wndPrj[1])
-plt.axis('image')
 plt.title('low-dose\n(VIEW: %d)' % VIEW)
 plt.xlabel('View')
 plt.ylabel('Detector')
 
 plt.subplot(248)
 plt.imshow(y - p, cmap='gray')
-plt.axis('image')
 plt.title('full-dose - low-dose\n(Poisson noise)')
 plt.xlabel('View')
 plt.ylabel('Detector')
